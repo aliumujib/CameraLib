@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://stackoverflow.com/questions/24772985/how-can-i-design-the-custom-seekbar-in-android
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/border_shadow"></item>
+
+    <item android:id="@android:id/progress">
+        <clip android:drawable="@drawable/seekbar_progress" />
+    </item>
+</layer-list>

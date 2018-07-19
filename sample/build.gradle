@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    buildToolsVersion versions.android.buildTools
+    compileSdkVersion versions.sdk.target
+
+    defaultConfig {
+        applicationId "com.aliumujib.cameralib"
+        minSdkVersion versions.sdk.minimum
+        targetSdkVersion versions.sdk.target
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+ext {
+    supportVersion = '27.1.0'
+    picassoVersion = '2.5.2'
+    circleImageViewVersion = '2.1.0'
+    shapeImageViewVersion = '0.9.3'
+    circleindicatorVersion = '1.2.2@aar'
+    archLifeCycleComponentsVersion = '1.1.0'
+}
+
+
+dependencies {
+    implementation 'io.fotoapparat.fotoapparat:library:2.3.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
+    implementation "android.arch.lifecycle:extensions:$archLifeCycleComponentsVersion"
+    kapt "android.arch.lifecycle:compiler:$archLifeCycleComponentsVersion"
+    implementation "com.android.support:appcompat-v7:${versions.android.support}"
+    implementation "com.android.support:exifinterface:${versions.android.support}"
+    compile "com.android.support:recyclerview-v7:${versions.android.support}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+}
