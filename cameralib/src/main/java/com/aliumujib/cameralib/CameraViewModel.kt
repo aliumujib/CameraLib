@@ -8,7 +8,7 @@ import android.util.Log
  * Created by aliumujib on 08/06/2018.
  */
 
-class CameraViewModel(val listOfImages: MutableList<String>) : ViewModel() {
+class CameraViewModel(val listOfImages: MutableList<String>, var maxPhotoCount: Int) : ViewModel() {
 
     val LOGGING_TAG = javaClass.canonicalName
 
@@ -22,7 +22,7 @@ class CameraViewModel(val listOfImages: MutableList<String>) : ViewModel() {
     var currentZoom: Int = 0
     var zoom: MutableLiveData<Int> = MutableLiveData()
 
-    var maxPhotoCount: Int = 5
+
     var isAllowedToSnap = MutableLiveData<Boolean>()
     var photoAllowance = MutableLiveData<Int>()
     var refreshPhotos = MutableLiveData<Unit>()

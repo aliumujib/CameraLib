@@ -183,7 +183,6 @@ class CameraLibActivity : AppCompatActivity() {
         cameraPermissionsGranted = permissionsDelegate.hasCameraPermission()
         storagePermissionsGranted = permissionsDelegate.hasStoragePermission()
 
-
         if (cameraPermissionsGranted && storagePermissionsGranted) {
             cameraView.visibility = View.VISIBLE
         } else {
@@ -193,7 +192,10 @@ class CameraLibActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModel() {
-        camVMFactory = ViewModelFactory(lazyOf(CameraViewModel(pathList)))
+        camVMFactory = ViewModelFactory(lazyOf(CameraViewModel(pathList, intent.getIntExtra(MAX_PHOTO_COUNT, 5))))
+        if(intent.getStringExtra(SET_RESULT_BTN_TITLE)!=null){
+            result_setter.text = intent.getStringExtra(SET_RESULT_BTN_TITLE)
+        }
         cameraViewModel = ViewModelProviders.of(this, camVMFactory).get(CameraViewModel::class.java)
         cameraViewModel.setUp()
     }
@@ -218,9 +220,10 @@ class CameraLibActivity : AppCompatActivity() {
         photoResult
                 .toBitmap()
                 .whenAvailable { bitmapPhoto ->
-                    photoAdapter.notifyDataSetChanged()
+                    this.runOnUiThread({
+                        photoAdapter.notifyDataSetChanged()
+                    })
                 }
-
 
         Log.i(LOGGING_TAG, "New photo captured. saved at: ${file.path}")
         cameraViewModel.addFilePath(file.path)
