@@ -17,17 +17,29 @@ import io.fotoapparat.log.logcat
 import io.fotoapparat.parameter.Flash
 import io.fotoapparat.parameter.Zoom
 import io.fotoapparat.selector.*
-import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
+import kotlinx.android.synthetic.main.activity_camera_lib.*
 import java.util.ArrayList
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmName
 
 
 private const val LOGGING_TAG = "CAMERA_LIB"
 
-class MainActivity : AppCompatActivity() {
+
+//@JvmName("CameraLibActivity")
+class CameraLibActivity : AppCompatActivity() {
     val RESULT_TAG = "RESULT_TAG"
 
-    public val PHOTO_DATA_TAG = "DATA_TAG"
+    companion object {
+        @JvmField
+        public val PHOTO_DATA_TAG = "DATA_TAG"
+        @JvmField
+        public val MAX_PHOTO_COUNT: String = "MAX_PHOTO_COUNT"
+        @JvmField
+        public val SET_RESULT_BTN_TITLE: String = "SET_RESULT_BTN_TITLE"
+    }
+
 
     private var pathList: MutableList<String> = mutableListOf()
     private val permissionsDelegate = PermissionsDelegate(this)
@@ -42,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_camera_lib)
 
         initializeViewModel()
 
